@@ -182,6 +182,34 @@ public partial class MainPage : ContentPage
 	{
 		Vibration.Default.Vibrate(TimeSpan.FromSeconds(1.1));
 	}
-    #endregion
+	#endregion
+
+	#region Barometer
+	private void BarometerSwitch_Toggled (object sender, ToggledEventArgs e)
+	{
+		if (!Barometer.Default.IsSupported)
+		{
+			labelBarometer.Text = "Device doesn't have barometer";
+			return;
+		}
+
+		if (!Barometer.Default.IsMonitoring)
+		{
+			Barometer.Default.ReadingChanged += Barometer_ReadingChanged;
+			Barometer.Default.Start(SensorSpeed.UI);
+		}
+		else
+		{
+			Barometer.Default.Stop();
+			Barometer.Default.ReadingChanged -= Barometer_ReadingChanged;
+		}
+	}
+
+	private void Barometer_ReadingChanged (object sender, BarometerChangedEventArgs e)
+	{
+		labelBarometer.Text = $"Barometer: {e.Reading.PressureInHectopascals} hPa";
+		progressBarPressure.Progress = e.Reading.PressureInHectopascals / 2000;
+    }
+	#endregion
 }
 

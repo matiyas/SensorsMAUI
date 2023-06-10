@@ -16,7 +16,8 @@
             <Label x:Name="labelDevice"
                    TextColor="Navy"/>
 
-            <Label x:Name="labelScreen"/>
+            <Label x:Name="labelScreen"
+                   TextColor="Black"/>
 
             <VerticalStackLayout>
                 
@@ -29,7 +30,8 @@
                             VerticalOptions="Center"/>
                     
                     <Label Text="Observe battery changes"
-                           VerticalOptions="Center"/>
+                           VerticalOptions="Center"
+                           TextColor="Black"/>
                     
                 </HorizontalStackLayout>
                 
@@ -76,6 +78,26 @@
                         Clicked="FlashlightButton_Clicked"/>
 
             </VerticalStackLayout>
+
+            <VerticalStackLayout>
+                
+                <HorizontalStackLayout>
+                    
+                    <Switch IsToggled="False"
+                            Toggled="BarometerSwitch_Toggled"
+                            OnColor="Blue"
+                            ThumbColor="Navy"
+                            VerticalOptions="Center"/>
+                    
+                </HorizontalStackLayout>
+                
+            </VerticalStackLayout>
+
+            <Label x:Name="labelBarometer"
+                   TextColor="Black"/>
+            
+            <ProgressBar x:Name="progressBarPressure"
+                         ProgressColor="Navy"/>
 
         </VerticalStackLayout>
 
