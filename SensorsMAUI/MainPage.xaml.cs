@@ -136,6 +136,51 @@ public partial class MainPage : ContentPage
 	{
 		labelShaking.Text = $"Device shaking detected";
 		_timeFromTheLastShake = DateTime.Now;
+
+		ToggleFlashlightState();
+		SignalWithVibrations();
+	}
+	#endregion
+
+	#region Flashlight and vibrations
+	private bool _flashlightTurnedOn = false;
+
+	private async void ToggleFlashlightState ()
+	{
+		try
+		{
+			_flashlightTurnedOn = !_flashlightTurnedOn;
+			if (_flashlightTurnedOn)
+			{
+				await Flashlight.Default.TurnOnAsync();
+			}
+			else
+			{
+				await Flashlight.Default.TurnOffAsync();
+			} 
+		}
+		catch (FeatureNotSupportedException) 
+		{
+			await DisplayAlert(Title, "Device has no flashlight", "OK");
+		}
+		catch (PermissionException)
+		{
+			await DisplayAlert(Title, "Application has no permission to use flashlight", "OK");
+		}
+		catch (Exception)
+		{
+			await DisplayAlert(Title, "It's not possible to turn the flashlight on or off", "OK");
+		}
+	}
+
+	private void FlashlightButton_Clicked (object sender, EventArgs e)
+	{
+		ToggleFlashlightState();
+	}
+
+	private void SignalWithVibrations ()
+	{
+		Vibration.Default.Vibrate(TimeSpan.FromSeconds(1.1));
 	}
     #endregion
 }

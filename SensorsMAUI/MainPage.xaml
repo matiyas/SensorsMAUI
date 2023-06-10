@@ -71,9 +71,9 @@
                        Text="---"
                        TextColor="DarkRed"/>
 
-                <!--<Button Text="Turn on/off the flashlight"
+                <Button Text="Turn on/off the flashlight"
                         Margin="0,10,0,0"
-                        Clicked="FlashlightButton_Clicked"/>-->
+                        Clicked="FlashlightButton_Clicked"/>
 
             </VerticalStackLayout>
 
