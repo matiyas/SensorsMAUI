@@ -1,41 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SensorsMAUI.MainPage">
+             x:Class="SensorsMAUI.MainPage"
+             Title="Sensors and state of the device"
+             BackgroundColor="White"
+             Loaded="ContentPage_Loaded">
 
     <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+        
+        <VerticalStackLayout Spacing="10"
+                             Padding="10"
+                             VerticalOptions="Start"
+                             HorizontalOptions="Start">
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+            <Label x:Name="labelDevice"
+                   TextColor="Navy"/>
 
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+            <Label x:Name="labelScreen"/>
 
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+            <VerticalStackLayout>
+                
+                <HorizontalStackLayout>
+                    
+                    <Switch IsToggled="False"
+                            Toggled="BatterySwitch_Toggled"
+                            OnColor="Lime"
+                            ThumbColor="Green"
+                            VerticalOptions="Center"/>
+                    
+                    <Label Text="Observe battery changes"
+                           VerticalOptions="Center"/>
+                    
+                </HorizontalStackLayout>
+                
+                <Label x:Name="labelBatteryStatus" 
+                       TextColor="Black"/>
+                
+                <Label x:Name="labelBatteryLevel" 
+                       TextColor="Black"/>
+                
+                <ProgressBar x:Name="progressBarBatteryLevel"
+                             ProgressColor="Green"/>
+                
+            </VerticalStackLayout>
 
         </VerticalStackLayout>
+
     </ScrollView>
 
 </ContentPage>
