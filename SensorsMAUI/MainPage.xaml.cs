@@ -102,11 +102,13 @@ public partial class MainPage : ContentPage
 		if (!Accelerometer.Default.IsMonitoring)
 		{
 			Accelerometer.Default.ReadingChanged += DisplayAccelerationReading;
+			Accelerometer.Default.ShakeDetected += SignalShake;
 			Accelerometer.Default.Start(SensorSpeed.UI);
 		}
 		else
 		{
 			Accelerometer.Stop();
+			Accelerometer.Default.ShakeDetected -= SignalShake;
 			Accelerometer.Default.ReadingChanged -= DisplayAccelerationReading;
         }
 	}
@@ -123,6 +125,17 @@ public partial class MainPage : ContentPage
 
 		labelAccelerometer.Text = accelerationReading.ToString();
 		progressBarAcceleration.Progress = e.Reading.Acceleration.Length() / 10;
+
+		if (DateTime.Now > _timeFromTheLastShake.AddSeconds(3))
+			labelShaking.Text = "---";
+	}
+
+	private DateTime _timeFromTheLastShake;
+
+	private void SignalShake (object sender, EventArgs e)
+	{
+		labelShaking.Text = $"Device shaking detected";
+		_timeFromTheLastShake = DateTime.Now;
 	}
     #endregion
 }
