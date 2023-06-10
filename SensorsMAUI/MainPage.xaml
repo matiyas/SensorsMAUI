@@ -44,6 +44,31 @@
                 
             </VerticalStackLayout>
 
+            <VerticalStackLayout>
+                
+                <HorizontalStackLayout>
+                    
+                    <Switch IsToggled="False"
+                            Toggled="AccelerometerSwitch_Toggled"
+                            OnColor="Red"
+                            ThumbColor="DarkRed"
+                            VerticalOptions="Center"/>
+
+                    <Label Text="Observe acceleration"
+                           VerticalOptions="Center"
+                           TextColor="Black"/>
+                    
+                </HorizontalStackLayout>
+
+                <Label x:Name="labelAccelerometer"
+                       Text="---"
+                       TextColor="Black"/>
+
+                <ProgressBar x:Name="progressBarAcceleration"
+                             ProgressColor="DarkRed"/>
+                
+            </VerticalStackLayout>
+
         </VerticalStackLayout>
 
     </ScrollView>

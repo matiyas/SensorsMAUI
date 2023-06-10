@@ -92,6 +92,38 @@ public partial class MainPage : ContentPage
 		labelBatteryLevel.Text = $"Battery is charged in {e.ChargeLevel * 100}%";
 		progressBarBatteryLevel.Progress = e.ChargeLevel;
 	}
+	#endregion
+
+	#region Accelerometer
+	private void AccelerometerSwitch_Toggled (object sender, ToggledEventArgs e)
+	{
+		if (!Accelerometer.Default.IsSupported) return;
+
+		if (!Accelerometer.Default.IsMonitoring)
+		{
+			Accelerometer.Default.ReadingChanged += DisplayAccelerationReading;
+			Accelerometer.Default.Start(SensorSpeed.UI);
+		}
+		else
+		{
+			Accelerometer.Stop();
+			Accelerometer.Default.ReadingChanged -= DisplayAccelerationReading;
+        }
+	}
+
+	private void DisplayAccelerationReading(object sender, AccelerometerChangedEventArgs e)
+	{
+		var accelerationReading = new StringBuilder();
+		accelerationReading.Append("Acceleration vector:\n");
+		accelerationReading.Append($"\tX = {e.Reading.Acceleration.X}\n");
+		accelerationReading.Append($"\tY = {e.Reading.Acceleration.Y}\n");
+		accelerationReading.Append($"\tZ = {e.Reading.Acceleration.Z}\n");
+		accelerationReading.Append($"Vector length: {9.81 * e.Reading.Acceleration.Length()}");
+
+
+		labelAccelerometer.Text = accelerationReading.ToString();
+		progressBarAcceleration.Progress = e.Reading.Acceleration.Length() / 10;
+	}
     #endregion
 }
 
