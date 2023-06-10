@@ -120,6 +120,25 @@
 
             </VerticalStackLayout>
 
+            <VerticalStackLayout>
+
+                <HorizontalStackLayout>
+
+                    <Switch IsToggled="False"
+                            Toggled="OrientationSwitch_Toggled"
+                            OnColor="Yellow"
+                            ThumbColor="Olive"
+                            VerticalOptions="Center"/>
+
+                    <Label Text="Observe orientation change"
+                           VerticalOptions="Center"/>
+
+                </HorizontalStackLayout>
+
+                <Label x:Name="labelOrientation"/>
+
+            </VerticalStackLayout>
+
         </VerticalStackLayout>
 
     </ScrollView>

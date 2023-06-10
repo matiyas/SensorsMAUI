@@ -116,6 +116,7 @@ public partial class MainPage : ContentPage
 	private void DisplayAccelerationReading(object sender, AccelerometerChangedEventArgs e)
 	{
 		var accelerationReading = new StringBuilder();
+
 		accelerationReading.Append("Acceleration vector:\n");
 		accelerationReading.Append($"\tX = {e.Reading.Acceleration.X}\n");
 		accelerationReading.Append($"\tY = {e.Reading.Acceleration.Y}\n");
@@ -236,6 +237,41 @@ public partial class MainPage : ContentPage
     private void Compass_ReadingChanged(object sender, CompassChangedEventArgs e)
     {
         labelCompass.Text = $"Compass: {e.Reading.HeadingMagneticNorth}";
+    }
+    #endregion
+
+    #region Orientation
+    private void OrientationSwitch_Toggled(Object sender, ToggledEventArgs e)
+    {
+        if (!OrientationSensor.Default.IsSupported)
+        {
+            labelOrientation.Text = "Device doesn't have magnetic sensor";
+            return;
+        }
+
+        if (!OrientationSensor.Default.IsMonitoring)
+        {
+            OrientationSensor.Default.ReadingChanged += Orientation_ReadingChanged;
+            OrientationSensor.Default.Start(SensorSpeed.UI);
+        }
+        else
+        {
+            OrientationSensor.Default.Stop();
+            OrientationSensor.Default.ReadingChanged -= Orientation_ReadingChanged;
+        }
+    }
+
+    private void Orientation_ReadingChanged(object sender, OrientationSensorChangedEventArgs e)
+    {
+		var labelOrientationText = new StringBuilder();
+
+		labelOrientationText.Append($"Orientation:\n");
+		labelOrientationText.Append($"\tX = {e.Reading.Orientation.X}");
+		labelOrientationText.Append($"\tY = {e.Reading.Orientation.Y}");
+		labelOrientationText.Append($"\tZ = {e.Reading.Orientation.Z}");
+		labelOrientationText.Append($"\tW = {e.Reading.Orientation.W}");
+
+        labelOrientation.Text = labelOrientationText.ToString();
     }
     #endregion
 }
