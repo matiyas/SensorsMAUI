@@ -7,7 +7,7 @@
              Loaded="ContentPage_Loaded">
 
     <ScrollView>
-        
+
         <VerticalStackLayout Spacing="10"
                              Padding="10"
                              VerticalOptions="Start"
@@ -20,36 +20,36 @@
                    TextColor="Black"/>
 
             <VerticalStackLayout>
-                
+
                 <HorizontalStackLayout>
-                    
+
                     <Switch IsToggled="False"
                             Toggled="BatterySwitch_Toggled"
                             OnColor="Lime"
                             ThumbColor="Green"
                             VerticalOptions="Center"/>
-                    
+
                     <Label Text="Observe battery changes"
                            VerticalOptions="Center"
                            TextColor="Black"/>
-                    
+
                 </HorizontalStackLayout>
-                
+
                 <Label x:Name="labelBatteryStatus" 
                        TextColor="Black"/>
-                
+
                 <Label x:Name="labelBatteryLevel" 
                        TextColor="Black"/>
-                 
+
                 <ProgressBar x:Name="progressBarBatteryLevel"
                              ProgressColor="Green"/>
-                
+
             </VerticalStackLayout>
 
             <VerticalStackLayout>
-                
+
                 <HorizontalStackLayout>
-                    
+
                     <Switch IsToggled="False"
                             Toggled="AccelerometerSwitch_Toggled"
                             OnColor="Red"
@@ -59,7 +59,7 @@
                     <Label Text="Observe acceleration"
                            VerticalOptions="Center"
                            TextColor="Black"/>
-                    
+
                 </HorizontalStackLayout>
 
                 <Label x:Name="labelAccelerometer"
@@ -80,24 +80,45 @@
             </VerticalStackLayout>
 
             <VerticalStackLayout>
-                
+
                 <HorizontalStackLayout>
-                    
+
                     <Switch IsToggled="False"
                             Toggled="BarometerSwitch_Toggled"
                             OnColor="Blue"
                             ThumbColor="Navy"
                             VerticalOptions="Center"/>
-                    
+
                 </HorizontalStackLayout>
-                
+
             </VerticalStackLayout>
 
             <Label x:Name="labelBarometer"
                    TextColor="Black"/>
-            
+
             <ProgressBar x:Name="progressBarPressure"
                          ProgressColor="Navy"/>
+
+            <VerticalStackLayout>
+
+                <HorizontalStackLayout>
+
+                    <Switch IsToggled="False"
+                            Toggled="CompassSwitch_Toggled"
+                            OnColor="Magenta"
+                            ThumbColor="Purple"
+                            VerticalOptions="Center"/>
+
+                    <Label Text="Observe compass"
+                           VerticalOptions="Center"
+                           TextColor="Black"/>
+
+                </HorizontalStackLayout>
+
+                <Label x:Name="labelCompass" 
+                       TextColor="Black"/>
+
+            </VerticalStackLayout>
 
         </VerticalStackLayout>
 

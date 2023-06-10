@@ -211,5 +211,32 @@ public partial class MainPage : ContentPage
 		progressBarPressure.Progress = e.Reading.PressureInHectopascals / 2000;
     }
 	#endregion
+
+	#region Compass
+	private void CompassSwitch_Toggled (Object sender, ToggledEventArgs e)
+	{
+		if (!Compass.Default.IsSupported)
+		{
+			labelCompass.Text = "Device doesn't have compass";
+			return;
+		}
+
+        if (!Compass.Default.IsMonitoring)
+        {
+            Compass.Default.ReadingChanged += Compass_ReadingChanged;
+            Compass.Default.Start(SensorSpeed.UI);
+        }
+        else
+        {
+            Compass.Default.Stop();
+            Compass.Default.ReadingChanged -= Compass_ReadingChanged;
+        }
+    }
+
+    private void Compass_ReadingChanged(object sender, CompassChangedEventArgs e)
+    {
+        labelCompass.Text = $"Compass: {e.Reading.HeadingMagneticNorth}";
+    }
+    #endregion
 }
 
